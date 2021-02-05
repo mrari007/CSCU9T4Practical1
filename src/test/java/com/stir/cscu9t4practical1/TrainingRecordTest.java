@@ -122,9 +122,9 @@ public class TrainingRecordTest {
      * un-comment call to the method and the assertion line
      */
     @Test
-    public void testLookupEntries() {
+    public void testLookAllEntries() {
         System.out.println("lookupEntries");
-        String expectResultsNone = "Sorry couldn't find anything for this date";
+        String expectResultsNone = "No entries found";
         String expectResults = "Alice ran 3.0 km in 0:16:7 on 1/2/2003\n" + 
                                 "Bob ran 3.0 km in 0:14:15 on 1/2/2003\n";
         TrainingRecord instance = new TrainingRecord();
@@ -132,15 +132,50 @@ public class TrainingRecordTest {
         Entry b = new Entry("Bob", 1, 2, 2003, 0, 14, 15, 3);
         instance.addEntry(a);
         instance.addEntry(b);
-        fail("This method cannot be tested as it does not exist yet");
+        
         int d = 1;
         int m = 2;
         int y = 2003;
-   //      un-comment the lines below when you've implemented the method
+        // un-comment the lines below when you've implemented the method
         String resultSuccess = instance.lookAllEntries(d,m,y);
         String resultNone = instance.lookAllEntries(d,m,1999);
         assertEquals(expectResultsNone,resultNone);
         assertEquals(expectResults,resultSuccess);
+    }
+    
+    @Test
+    public void testLookAllByName () {
+
+        Entry a = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
+        Entry b = new Entry("Bob", 1, 2, 2003, 0, 14, 15, 3);
+        Entry c = new Entry("Bob", 4, 3, 1999, 0, 14, 15, 3);
+        TrainingRecord instance = new TrainingRecord();
+        instance.addEntry(a);
+        instance.addEntry(b);
+        instance.addEntry(c);
+        String bob = "Bob";
+        String expectedResult = "Bob ran 3.0 km in 0:14:15 on 1/2/2003\n" + 
+                "Bob ran 3.0 km in 0:14:15 on 4/3/1999\n";
+        String resultSuccess = instance.lookAllByName(bob);
+        assertEquals(expectedResult, resultSuccess);
+        
+    }
+    @Test
+    public void testRemoveEntry ()  {
+        Entry a = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
+        Entry b = new Entry("Bob", 1, 2, 2003, 0, 14, 15, 3);
+        Entry c = new Entry("Garen", 4, 3, 1999, 0, 14, 15, 3);
+        TrainingRecord instance = new TrainingRecord();
+        instance.addEntry(a);
+        instance.addEntry(b);
+        instance.addEntry(c);
+        String bob = "Bob";
+        int d = 1;
+        int m = 2;
+        int y = 2003;
+        String expectedResult = "Entry has been removed";
+        String resultSuccess = instance.removeEntry(bob, d, m, y);
+        assertEquals(expectedResult, resultSuccess);
     }
     
 }
