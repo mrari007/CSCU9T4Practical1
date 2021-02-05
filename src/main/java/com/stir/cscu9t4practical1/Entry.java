@@ -53,6 +53,7 @@ public class Entry {
              +getHour()+":"+getMin()+":"+ getSec() + " on "
              +getDay()+"/"+getMonth()+"/"+getYear()+"\n";
    return result;
+  }
   } //getEntry
    
-} // Entry
+ // Entry
