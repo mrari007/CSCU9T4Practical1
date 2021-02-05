@@ -22,11 +22,11 @@ public class TrainingRecordTest {
     }
     
     @BeforeAll
-    public void setUpClass() {
+    public static void setUpClass() {
     }
     
     @AfterAll
-    public void tearDownClass() {
+    public static void tearDownClass() {
     }
     
     @BeforeEach
@@ -48,7 +48,7 @@ public class TrainingRecordTest {
         Entry a = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         TrainingRecord instance = new TrainingRecord();
         instance.addEntry(a);
-        assertEquals(instance.getNumberOfEntries(),1);
+        assertEquals(1, instance.getNumberOfEntries());
     }
     
     /**
@@ -136,11 +136,11 @@ public class TrainingRecordTest {
         int d = 1;
         int m = 2;
         int y = 2003;
-        // un-comment the lines below when you've implemented the method
-//        String resultSuccess = instance.lookupEntries(d,m,y);
-//        String resultNone = instance.lookupEntries(d,m,1999);
-//        assertEquals(expectResultsNone,resultNone);
-//        assertEquals(expectResults,resultSuccess);
+   //      un-comment the lines below when you've implemented the method
+        String resultSuccess = instance.lookAllEntries(d,m,y);
+        String resultNone = instance.lookAllEntries(d,m,1999);
+        assertEquals(expectResultsNone,resultNone);
+        assertEquals(expectResults,resultSuccess);
     }
     
 }

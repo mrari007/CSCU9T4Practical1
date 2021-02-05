@@ -91,12 +91,12 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
 
         add(repLabel);
         add(repTField);
+      //  if()
         repTField.setEditable(true);
         add(recLabel);
         add(recTField);
         recTField.setEditable(true);
 
-        
         add(whereLabel);
         add(whereTField);
         whereTField.setEditable(true);
@@ -114,10 +114,14 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         outputArea.setEditable(false);
         add(remove);
         remove.addActionListener(this);
+        lookUpByDate.setEnabled(false);
+        FindAllByDate.setEnabled(false);
+        find.setEnabled(false);
+        remove.setEnabled(false);
         setSize(950, 250);
         setVisible(true);
         blankDisplay();
-
+        
         // To save typing in new entries while testing, uncomment
         // the following lines (or add your own test cases)
         
@@ -130,6 +134,13 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         	
             message = addEntry();
            System.out.println(myAthletes.getNumberOfEntries());
+           if(myAthletes.getNumberOfEntries() > 0)
+           {
+           lookUpByDate.setEnabled(true);
+           FindAllByDate.setEnabled(true);
+           find.setEnabled(true);
+           remove.setEnabled(true);
+           }
         }
         if (event.getSource() == lookUpByDate) {
             message = lookupEntry();
@@ -145,6 +156,13 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         }
         if (event.getSource() == remove) {
         	message = removeEntry();
+            if(myAthletes.getNumberOfEntries() <= 0)
+            {
+            lookUpByDate.setEnabled(false);
+            FindAllByDate.setEnabled(false);
+            find.setEnabled(false);
+            remove.setEnabled(false);
+            }
         }
         outputArea.setText(message);
         blankDisplay();
@@ -347,6 +365,10 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         mins.setText(String.valueOf(ent.getMin()));
         secs.setText(String.valueOf(ent.getSec()));
         dist.setText(String.valueOf(ent.getDistance()));
+    }
+    
+    public void setEnability ()
+    {
     }
 
 } // TrainingRecordGUI
