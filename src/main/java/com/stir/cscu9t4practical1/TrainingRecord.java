@@ -85,6 +85,25 @@ public class TrainingRecord {
 	            }
 	       return result;
    }
+   
+   public String removeEntry (String n, int d, int m, int y)
+   {
+	   String result = "";
+	   for (int i = 0; i<tr.size(); i++)
+	   {
+		    Entry eToBeRemoved = tr.get(i);
+		    if(n.equalsIgnoreCase(eToBeRemoved.getName()) && d ==  eToBeRemoved.getDay() && 
+		    		m == eToBeRemoved.getMonth() &&  y == eToBeRemoved.getYear())
+		    {
+		    	tr.remove(i);
+		    	result = "Entry has been removed";
+		    } else
+		    {
+		    	result = "Such Entry does not exist.";  
+		    }
+	   }
+	   return result;
+   }
    // Count the number of entries
    public int getNumberOfEntries(){
        return tr.size();

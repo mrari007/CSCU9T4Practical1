@@ -24,7 +24,7 @@ public class SprintEntry extends Entry{
 			  public String getEntry()
 			  {
 				   String result = getName()+" sprinted " + getRepetitions() + "x" +  getDistance() + "m in "
-				             +getHour()+":"+getMin()+":"+ getSec() + " with "+getRecovery()+" minutes recovory on "
+				             +getHour()+":"+getMin()+":"+ getSec() + " with "+getRecovery()+" minutes recovery on "
 				             +getDay()+"/"+getMonth()+"/"+getYear() + "\n";
 				   return result;
 			  }

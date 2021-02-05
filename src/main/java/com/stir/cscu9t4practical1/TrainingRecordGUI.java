@@ -43,6 +43,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JTextField whereTField = new JTextField(5);
 
     private JButton find = new JButton("Find all by name");
+    private JButton remove = new JButton ("Remove");
     private TrainingRecord myAthletes = new TrainingRecord();
 
     private JTextArea outputArea = new JTextArea(5, 50);
@@ -111,6 +112,8 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         find.addActionListener(this);
         add(outputArea);
         outputArea.setEditable(false);
+        add(remove);
+        remove.addActionListener(this);
         setSize(950, 250);
         setVisible(true);
         blankDisplay();
@@ -126,7 +129,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         if (event.getSource() == addR) {
         	
             message = addEntry();
-            
+           System.out.println(myAthletes.getNumberOfEntries());
         }
         if (event.getSource() == lookUpByDate) {
             message = lookupEntry();
@@ -139,6 +142,9 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         if(event.getSource() == find)
         {
         	message = lookAllByName();
+        }
+        if (event.getSource() == remove) {
+        	message = removeEntry();
         }
         outputArea.setText(message);
         blankDisplay();
@@ -295,6 +301,26 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         	}
     
     }
+        
+        public String removeEntry ()
+        {
+        	try {
+        	String n = name.getText();
+            int d = Integer.parseInt(day.getText());
+        	int m = Integer.parseInt(month.getText());
+            int y = Integer.parseInt(year.getText());
+            String message = myAthletes.removeEntry(n, d, m, y);
+
+            if (message == "Entry has been removed")
+        	{
+        		count -- ;
+        	}
+            return message;
+        	} catch (Exception e)
+        	{
+        		return "Wrong input";
+        	}
+        }
     public void blankDisplay() {
         name.setText("");
         day.setText("");

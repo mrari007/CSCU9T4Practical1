@@ -90,7 +90,7 @@ public class TrainingRecordGUITest {
         TrainingRecordGUI instance = new TrainingRecordGUI();
         Entry entry = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
         instance.fillDisplay(entry);
-        String message = instance.addEntry("generic");
+        String message = instance.addEntry();
         System.out.println(message);
         assertEquals(message,"Record added\n");
     }
