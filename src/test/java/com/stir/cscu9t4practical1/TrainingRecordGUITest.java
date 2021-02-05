@@ -92,7 +92,7 @@ public class TrainingRecordGUITest {
         instance.fillDisplay(entry);
         String message = instance.addEntry();
         System.out.println(message);
-        assertEquals(message,"Record added\n");
+        assertEquals(message,"Adding generic entry to the records");
     }
     
     /**
@@ -103,7 +103,7 @@ public class TrainingRecordGUITest {
         System.out.println("Check if you have added the buttons"); 
         TrainingRecordGUI instance = new TrainingRecordGUI();
         Class<?> instanceClass = instance.getClass();
-        String[] expectedFields = {"findAllByDate","lookUpByDate"}; // add RemoveEntry when it is ready
+        String[] expectedFields = {"addR", "lookUpByDate", "FindAllByDate", "find", "remove"}; // add RemoveEntry when it is ready {"findAllByDate","lookUpByDate", "RemoveEntry"
         Field fields[] = instanceClass.getDeclaredFields();
         int found = 0;
         for (Field field : fields) {
@@ -115,4 +115,73 @@ public class TrainingRecordGUITest {
         }
         assertEquals(found,expectedFields.length,"Have you added all required buttons?");
     }
+    
+    @Test
+    public void testLookupEntry()
+    {
+
+        System.out.println("lookupEntry");
+        TrainingRecordGUI instance = new TrainingRecordGUI();
+        Entry entry = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
+        instance.fillDisplay(entry);
+        String message = instance.addEntry();
+        message = instance.lookupEntry();
+        System.out.println(message);
+        assertEquals(message,"Alice ran 3.0 km in 0:16:7 on 1/2/2003\n");
+    }
+    
+    @Test
+    public void testLookAllEntry()
+    {
+
+        System.out.println("lookAllEntry");
+        TrainingRecordGUI instance = new TrainingRecordGUI();
+        Entry a = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
+        Entry b = new Entry("Bob", 1, 2, 2003, 0, 16, 7, 3);
+        instance.fillDisplay(a);
+        String alice = instance.addEntry();
+        instance.fillDisplay(b);
+        String bob = instance.addEntry();
+        String result = instance.lookAllEntries();
+        System.out.println(result);
+        assertEquals(result,"Alice ran 3.0 km in 0:16:7 on 1/2/2003\n" + 
+                "Bob ran 3.0 km in 0:16:7 on 1/2/2003\n");
+    }
+    
+    @Test
+        public void testLookAllByName()
+        {
+
+            System.out.println("lookAllByName");
+            TrainingRecordGUI instance = new TrainingRecordGUI();
+            Entry a = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
+            Entry b = new Entry("Alice", 1, 1, 2001, 0, 16, 7, 3);
+            instance.fillDisplay(a);
+            String alice = instance.addEntry();
+            instance.fillDisplay(b);
+            String bob = instance.addEntry();
+            String result = instance.lookAllByName();
+            System.out.println(result);
+            assertEquals(result,"Alice ran 3.0 km in 0:16:7 on 1/2/2003\n" + 
+                    "Alice ran 3.0 km in 0:16:7 on 1/1/2001\n");
+        }
+    
+    @Test
+    public void testRemoveEntry()
+    {
+
+        System.out.println("RemoveEntry");
+        TrainingRecordGUI instance = new TrainingRecordGUI();
+        Entry a = new Entry("Alice", 1, 2, 2003, 0, 16, 7, 3);
+        Entry b = new Entry("Bob", 1, 1, 2001, 0, 16, 7, 3);
+        instance.fillDisplay(a);
+        String alice = instance.addEntry();
+        instance.fillDisplay(b);
+        String bob = instance.addEntry();
+        String result = instance.removeEntry();
+        System.out.println(result);
+        assertEquals(result,"Entry has been removed");
+    }
+    
+    
 }
